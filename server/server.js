@@ -2,7 +2,7 @@ import express from 'express'
 import connectDB from './config/db.js'
 import dotenv from 'dotenv'
 import cors from 'cors'
-// import authRoutes from './routes/authRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 // import analysisRoutes from './routes/analysisRoutes.js'
 
 dotenv.config()
@@ -12,7 +12,7 @@ connectDB()
 app.use(cors())
 app.use(express.json())
 
-// app.use('/api/auth', authRoutes)
+app.use('/api/auth', authRoutes)
 // app.use('/api/analysis', analysisRoutes)
 
 app.get('/', (req, res)=>{
