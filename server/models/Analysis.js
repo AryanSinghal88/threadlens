@@ -6,9 +6,9 @@ const analysisSchema = new mongoose.Schema({
         ref : 'User',
         required : true
     },
-    redditUrl : {
+    youtubeUrl : {
         type : String,
-        required : [true, 'Reddit URL is required'],
+        required : [true, 'YouTube URL is required'],
         trim : true
     },
     postTitle : {
