@@ -3,7 +3,7 @@ import { useState } from 'react'
 const extractVideoId = (url) => {
   if (!url) return ''
   const patterns = [
-    /(?:youtube\.com\/watch\?v=)([^&\n?#]+)/,
+    /[?&]v=([^&\n?#]+)/,
     /(?:youtu\.be\/)([^&\n?#]+)/,
     /(?:youtube\.com\/embed\/)([^&\n?#]+)/,
     /(?:youtube\.com\/shorts\/)([^&\n?#]+)/,
