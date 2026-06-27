@@ -202,7 +202,7 @@ const AnalysisCard = ({ analysis }) => {
             </p>
           </div>
           <a
-            href={analysis.redditUrl}
+            href={analysis.youtubeUrl}
             target='_blank'
             rel='noopener noreferrer'
             style={{
