@@ -123,7 +123,7 @@ const FieldCard = ({ field, value, delay }) => {
 }
 
 const AnalysisCard = ({ analysis }) => {
-  const videoId = extractVideoId(analysis.redditUrl)
+  const videoId = extractVideoId(analysis.youtubeUrl)
 //   const [imgSrc, setImgSrc] = useState(
 //     `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 //   )
