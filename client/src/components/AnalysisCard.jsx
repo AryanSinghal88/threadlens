@@ -128,7 +128,9 @@ const AnalysisCard = ({ analysis }) => {
 //     `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 //   )
   const [imgError, setImgError] = useState(false)
-
+  const thumbnailUrl = import.meta.env.VITE_API_URL
+    ? `${import.meta.env.VITE_API_URL}/api/thumbnail/${videoId}`
+    : `/api/thumbnail/${videoId}`
   return (
     <div style={{ width: '100%' }}>
 
@@ -147,11 +149,11 @@ const AnalysisCard = ({ analysis }) => {
         <div style={{ width: '100%', height: '180px', overflow: 'hidden', position: 'relative', background: 'var(--bg-elevated)' }}>
   {!imgError ? (
     <img
-      src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-      alt={analysis.postTitle}
-      onError={() => setImgError(true)}
-      style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-    />
+  src={thumbnailUrl}
+  alt={analysis.postTitle}
+  onError={() => setImgError(true)}
+  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+/>
   ) : (
     <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
       <svg width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='var(--text-dim)' strokeWidth='1.5'>

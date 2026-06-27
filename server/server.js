@@ -20,7 +20,21 @@ app.use(cors({
 app.use(express.json())
 
 app.use('/api/auth', authRoutes)
-app.use('/api/analysis', analysisRoutes)
+app.use('/api/analyses', analysisRoutes)
+app.get('/api/thumbnail/:videoId', async (req, res) => {
+  try {
+    const { videoId } = req.params
+    const url = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+    const response = await fetch(url)
+    if (!response.ok) throw new Error('Thumbnail not found')
+    const buffer = await response.arrayBuffer()
+    res.set('Content-Type', 'image/jpeg')
+    res.set('Cache-Control', 'public, max-age=86400')
+    res.send(Buffer.from(buffer))
+  } catch (error) {
+    res.status(404).json({ message: 'Thumbnail not found' })
+  }
+})
 
 app.get('/', (req, res)=>{
     res.json({ 'message': 'Welcome to the Threadlens API' })
