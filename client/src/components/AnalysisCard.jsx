@@ -128,9 +128,8 @@ const AnalysisCard = ({ analysis }) => {
 //     `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 //   )
   const [imgError, setImgError] = useState(false)
-  const thumbnailUrl = import.meta.env.VITE_API_URL
-    ? `${import.meta.env.VITE_API_URL}/api/thumbnail/${videoId}`
-    : `/api/thumbnail/${videoId}`
+  const apiBase = import.meta.env.VITE_API_URL || ''
+  const thumbnailUrl = `${apiBase}/api/thumbnail/${videoId}`
   return (
     <div style={{ width: '100%' }}>
 
@@ -148,13 +147,13 @@ const AnalysisCard = ({ analysis }) => {
         {/* Thumbnail */}
         <div style={{ width: '100%', height: '180px', overflow: 'hidden', position: 'relative', background: 'var(--bg-elevated)' }}>
   {!imgError ? (
-    <img
-  src={thumbnailUrl}
-  alt={analysis.postTitle}
-  onError={() => setImgError(true)}
-  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-/>
-  ) : (
+  <img
+    src={thumbnailUrl}
+    alt={analysis.postTitle}
+    onError={() => setImgError(true)}
+    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+  />
+) : (
     <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
       <svg width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='var(--text-dim)' strokeWidth='1.5'>
         <path d='M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z'/>
