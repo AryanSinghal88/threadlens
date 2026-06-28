@@ -1,3 +1,5 @@
+import Analysis from '../models/Analysis.js'
+
 export const getSharedAnalysis = async (req, res) => {
   try {
     const analysis = await Analysis.findOne({ shareId: req.params.shareId })
