@@ -4,10 +4,9 @@ import {
   getAnalyses,
   getAnalysis,
   deleteAnalysis,
-  getSharedAnalysis,
 } from '../controllers/analysisController.js'
 import { protect } from '../middleware/authMiddleware.js'
-
+import { getSharedAnalysis } from '../controllers/getShareAnalysis.js'
 const router = express.Router()
 
 router.route('/').get(protect, getAnalyses).post(protect, createAnalysis)
