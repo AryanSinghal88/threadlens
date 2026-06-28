@@ -4,6 +4,7 @@ import {
   getAnalyses,
   getAnalysis,
   deleteAnalysis,
+  getSharedAnalysis,
 } from '../controllers/analysisController.js'
 import { protect } from '../middleware/authMiddleware.js'
 
