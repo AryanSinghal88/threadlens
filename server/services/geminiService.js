@@ -34,7 +34,7 @@ Be specific and direct. Base everything strictly on what the comments actually s
 `
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {
@@ -81,6 +81,10 @@ Be specific and direct. Base everything strictly on what the comments actually s
 
     return analysis
   } catch (error) {
-    throw new Error(`Gemini analysis failed: ${error.message}`)
-  }
+  const isQuota = error.message?.includes('429') || error.message?.includes('RESOURCE_EXHAUSTED')
+  const msg = isQuota
+    ? 'Daily AI quota reached. Please try again tomorrow or use a different API key.'
+    : `Gemini analysis failed: ${error.message}`
+  throw new Error(msg)
+}
 }
