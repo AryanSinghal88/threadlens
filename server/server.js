@@ -3,7 +3,7 @@ import cors from 'cors'
 import connectDB from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import analysisRoutes from './routes/analysisRoutes.js'
-
+import rateLimit from 'express-rate-limit'
 const app = express()
 
 connectDB()
@@ -18,7 +18,24 @@ app.use(cors({
 }))
 
 app.use(express.json())
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 50,
+  message: { message: 'Too many requests, please try again after 15 minutes.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+})
 
+const analysisLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 10,
+  message: { message: 'Analysis limit reached. Please try again after an hour.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+})
+
+app.use('/api', limiter)
+app.use('/api/analyses', analysisLimiter)
 app.use('/api/auth', authRoutes)
 app.use('/api/analyses', analysisRoutes)
 
