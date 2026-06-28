@@ -23,3 +23,5 @@ export const createAnalysis = (youtubeUrl) =>
 export const getAnalyses = () => api.get('/analyses')
 export const getAnalysis = (id) => api.get(`/analyses/${id}`)
 export const deleteAnalysis = (id) => api.delete(`/analyses/${id}`)
+export const getSharedAnalysis = (shareId) =>
+  api.get(`/analyses/share/${shareId}`)

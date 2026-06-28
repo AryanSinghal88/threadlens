@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import Analysis from '../models/Analysis.js'
 import { fetchYouTubeComments } from '../services/youtubeService.js'
 import { analyzeComments } from '../services/geminiService.js'
@@ -39,6 +40,7 @@ export const createAnalysis = async (req, res) => {
       contrarian,
       verdict,
       commentCount: comments.length,
+      shareId: nanoid(10),
     })
 
     res.status(201).json(analysis)

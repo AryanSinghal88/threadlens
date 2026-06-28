@@ -7,7 +7,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import Analysis from './pages/Analysis'
-
+import Share from './pages/Share'
 function App() {
   return (
     <BrowserRouter>
@@ -35,6 +35,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path='/share/:shareId' element={<Share />} />
             </Routes>
           </main>
         </div>

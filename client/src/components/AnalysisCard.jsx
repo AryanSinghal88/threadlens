@@ -130,6 +130,7 @@ const AnalysisCard = ({ analysis }) => {
   const [imgError, setImgError] = useState(false)
   const apiBase = import.meta.env.VITE_API_URL || ''
   const thumbnailUrl = `${apiBase}/api/thumbnail/${videoId}`
+  const [copied, setCopied] = useState(false)
   return (
     <div style={{ width: '100%' }}>
 
@@ -201,24 +202,48 @@ const AnalysisCard = ({ analysis }) => {
               {analysis.commentCount} comments analyzed
             </p>
           </div>
-          <a
+          <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+        <button
+            onClick={() => {
+            const shareUrl = `${window.location.origin}/share/${analysis.shareId}`
+            navigator.clipboard.writeText(shareUrl)
+            setCopied(true)
+            setTimeout(() => setCopied(false), 2000)
+            }}
+            style={{
+            fontSize: '11px',
+            color: copied ? 'var(--success)' : 'var(--text-secondary)',
+            fontFamily: 'JetBrains Mono, monospace',
+            whiteSpace: 'nowrap',
+            padding: '4px 10px',
+            borderRadius: '6px',
+            border: `1px solid ${copied ? 'rgba(46, 204, 143, 0.3)' : 'var(--border)'}`,
+            background: copied ? 'rgba(46, 204, 143, 0.06)' : 'transparent',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+            }}
+        >
+            {copied ? 'Copied!' : 'Share'}
+        </button>
+            <a
             href={analysis.youtubeUrl}
             target='_blank'
             rel='noopener noreferrer'
             style={{
-              fontSize: '11px',
-              color: 'var(--accent)',
-              fontFamily: 'JetBrains Mono, monospace',
-              whiteSpace: 'nowrap',
-              flexShrink: 0,
-              padding: '4px 10px',
-              borderRadius: '6px',
-              border: '1px solid rgba(212, 148, 58, 0.2)',
-              background: 'rgba(212, 148, 58, 0.06)',
+            fontSize: '11px',
+            color: 'var(--accent)',
+            fontFamily: 'JetBrains Mono, monospace',
+            whiteSpace: 'nowrap',
+            padding: '4px 10px',
+            borderRadius: '6px',
+            border: '1px solid rgba(212, 148, 58, 0.2)',
+            background: 'rgba(212, 148, 58, 0.06)',
             }}
-            >
-            Watch 
-          </a>
+        >
+            Watch
+        </a>
+        </div>
+          
         </div>
       </div>
 

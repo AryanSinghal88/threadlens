@@ -10,7 +10,7 @@ import { protect } from '../middleware/authMiddleware.js'
 const router = express.Router()
 
 router.route('/').get(protect, getAnalyses).post(protect, createAnalysis)
-
+router.get('/share/:shareId', getSharedAnalysis)
 router
   .route('/:id')
   .get(protect, getAnalysis)

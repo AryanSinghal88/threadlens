@@ -39,7 +39,12 @@ const analysisSchema = new mongoose.Schema({
     commentCount : {
         type : Number,
         default : 0
-    }
+    },
+    shareId: {
+    type: String,
+    unique: true,
+    sparse: true,
+    },
 },
 {
     timestamps : true
